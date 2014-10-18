@@ -33,10 +33,19 @@
         background-image: url('kangax.png');
         background-position: 0 0 !important;
         background-size: 100% !important;
-        -webkit-filter: blur(3px) opacity(0.3);
-        -moz-filter: blur(3px) opacity(0.3);
-        -ms-filter: blur(3px) opacity(0.3);
-        filter: blur(3px) opacity(0.3);
+
+        -webkit-filter: blur(0px) opacity(0.3);
+        -moz-filter: blur(0px) opacity(0.3);
+        -ms-filter: blur(0px) opacity(0.3);
+        filter: blur(0px) opacity(0.3);
+      }
+
+      .kangax section,
+      .kangax section h2 {
+        text-shadow: -1px -1px 2px white,
+        1px 1px 2px white,
+        -1px 1px 2px white,
+        1px -1px 2px white;
       }
 
       .angular .slide-background {
@@ -224,13 +233,14 @@ export function f() { ... }
           <h2>Modules</h2>
           <ul>
             <li>When?
-              <ul class="fragment">
-                <li>When your code does not fit in one file.
+              <ul>
+                <li class="fragment" data-fragment-index="1">When your code does not fit in one file
+                <li class="fragment" data-fragment-index="1">For better logical grouping
               </ul>
             <li>What?
-              <ul class="fragment">
-                <li class="fragment" data-fragment-index="1">No synchronous load
-                <li class="fragment" data-fragment-index="1">Static dependencies!
+              <ul>
+                <li class="fragment" data-fragment-index="2">No synchronous load
+                <li class="fragment" data-fragment-index="2">Static dependencies!
                 <li class="fragment">Static validation
               </ul>
           </ul>
@@ -336,6 +346,7 @@ loadJsonP(userUrl)
             <li>When?
               <ul class="fragment">
                 <li>When you have (async) callbacks
+                <li>When you one time callbacks
               </ul>
             <li>What?
               <ul class="fragment">
@@ -355,7 +366,7 @@ loadJsonP(userUrl)
           <h2>Now!</h2>
 
           <ul>
-            <li>Browser are working hard to implement
+            <li>Browsers are working hard to implement
             <li>Latest browser are shipping parts already
             <li style="visibility:hidden"><a href="http://kangax.github.io/compat-table/es6/">http://kangax.github.io/compat-table/es6/</a>
         </section>
@@ -364,7 +375,7 @@ loadJsonP(userUrl)
           <h2>Now!</h2>
 
           <ul>
-            <li>Browser are working hard to implement
+            <li>Browsers are working hard to implement
             <li>Latest browser are shipping parts already
             <li><a href="http://kangax.github.io/compat-table/es6/">http://kangax.github.io/compat-table/es6/</a>
         </section>
@@ -375,16 +386,14 @@ loadJsonP(userUrl)
 
         <section data-state="traceur">
           <h2>Traceur to the rescue</h2>
-          <ul>
-            <li class="fragment">Compiles ES6 (and more) to ES5.
-            <li class="fragment">Works in all modern browsers!
-          </ul>
         </section>
 
         <section data-state="traceur">
           <h2>What is Traceur?</h2>
           <ul>
-            <li class="fragment">Compiler written ES6
+            <li class="fragment">Compiles ES6 (and more) to ES5.
+            <li class="fragment">Works in all modern browsers!
+            <li class="fragment">A compiler written ES6
             <li class="fragment">Designed to be a platform for experimenting with new language features
             <li class="fragment">Highly modular and extensible
           </ul>
@@ -399,7 +408,8 @@ loadJsonP(userUrl)
               </ul>
             <li class="fragment">Transform
               <ul>
-                <li>Transforms the AST with the language extension to an AST without
+                <li>Transforms the AST <b>with</b> the language extension to an
+                    AST <b>without</b> the language extension
                 <li>One transformer per language extension
               </ul>
             <li class="fragment">Write
@@ -407,6 +417,70 @@ loadJsonP(userUrl)
                 <li>Final AST is visited to output source and source maps
               </ul>
           </ul>
+        </section>
+
+        <section data-state="traceur">
+          <h2>Sample Transformer</h2>
+          <h3>Remove debug asserts</h3>
+          <pre><code class="javascript" data-trim data-noescape>
+function assert(b) {
+  if (!b) {
+    throw new Error('Assertion failed');
+  }
+}
+          </code></pre>
+        </section>
+
+        <section data-state="traceur">
+          <h2>Sample Transformer</h2>
+          <h3>Remove debug asserts</h3>
+
+          <pre><code class="javascript" data-trim data-noescape>
+// Transforms
+assert(someExpression)
+
+// To
+void 0
+          </code></pre>
+        </section>
+
+        <section data-state="traceur">
+          <p>Step 1 - Extend ParseTreeTransformer</p>
+          <pre><code class="javascript" data-trim data-noescape>
+class StripAssertTransformer
+    extends ParseTreeTransformer {
+  ...
+}
+          </code></pre>
+        </section>
+
+        <section data-state="traceur">
+          <p>Step 2 - Override transform method</p>
+          <pre><code class="javascript" data-trim data-noescape>
+transformCallExpression(tree) {
+  var operand = tree.operand;
+  if (operand.type === IDENTIFIER_EXPRESSION &amp;&amp;
+      operand.getStringValue() === 'assert') {
+    return createVoid0();
+  }
+  return super.transformCallExpression(tree);
+}
+          </code></pre>
+        </section>
+
+        <section data-state="traceur">
+          <p>Step 3 - Add transformer</p>
+          <pre><code class="javascript" data-trim data-noescape>
+// FromOptionsTransformer.js
+if (!options.debug) {
+  append(StripAssertTransformer);
+}
+          </code></pre>
+        </section>
+
+        <section data-state="traceur">
+          <p>Thats it!</p>
+          <p><a href="https://github.com/arv/traceur-compiler/compare/strip-assert">Patch</a></p>
         </section>
 
         <section data-state="angular">
