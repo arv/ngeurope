@@ -114,8 +114,8 @@
           <h2>Three topics on how to improve your code:</h2>
           <ol>
             <li class="fragment">ES6 features
-              <ul class="fragment"><li>Will be part of all browsers</ul>
-            <li class="fragment">Adding your own language extensions
+              <ul class="fragment"><li>Part of all browsers soon</ul>
+            <li class="fragment">Your own language extensions
               <ul class="fragment"><li>Make it part of your own tool chain</ul>
             <li class="fragment">Angular 2.0 language extensions
               <ul class="fragment"><li>Part of the Angular tool chain</ul>
@@ -337,6 +337,7 @@ loadJsonP(userUrl)
 })
 .then(data => showTweets(data.tweets))
 .catch(handleError);
+&nbsp;
           </code></pre>
         </section>
 
@@ -346,15 +347,19 @@ loadJsonP(userUrl)
             <li>When?
               <ul class="fragment">
                 <li>When you have (async) callbacks
-                <li>When you one time callbacks
+                <li>When you have one-time callbacks
               </ul>
             <li>What?
               <ul class="fragment">
                 <li>Chain your callbacks instead of nesting them
+                <li>Simplified error handling
               </ul>
           </ul>
         </section>
 
+        <section data-state="js">
+          <h2>And lots more...</h2>
+        </section>
 
         <section>
           <h2>So what?</h2>
@@ -391,16 +396,16 @@ loadJsonP(userUrl)
         <section data-state="traceur">
           <h2>What is Traceur?</h2>
           <ul>
-            <li class="fragment">Compiles ES6 (and more) to ES5.
-            <li class="fragment">Works in all modern browsers!
-            <li class="fragment">A compiler written ES6
+            <li class="fragment" data-fragment-index="1">Compiles ES6 (and more) to ES5
+            <li class="fragment" data-fragment-index="1">Works in all modern browsers!
+            <li class="fragment">A compiler written in ES6
             <li class="fragment">Designed to be a platform for experimenting with new language features
             <li class="fragment">Highly modular and extensible
           </ul>
         </section>
 
         <section data-state="traceur">
-          <h2>How does Traceur work</h2>
+          <h2>How does Traceur work?</h2>
           <ul>
             <li class="fragment">Compile
               <ul>
@@ -417,6 +422,10 @@ loadJsonP(userUrl)
                 <li>Final AST is visited to output source and source maps
               </ul>
           </ul>
+        </section>
+
+        <section data-state="traceur">
+          <h2>Your own language extension</h2>
         </section>
 
         <section data-state="traceur">
