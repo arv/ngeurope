@@ -319,7 +319,7 @@ class MenuButton {
 loadJson(userUrl, (err, data) => {
   if (err) return handleError(err);
   var twitterUrl = getTwitterUrl(data);
-  loadJsonP(twitterUrl, (err, data) => {
+  loadJson(twitterUrl, (err, data) => {
     if (err) return handleError(err);
     showTweets(data.tweets);
   });
