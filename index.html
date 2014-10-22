@@ -70,6 +70,11 @@
       }
 
     </style>
+    <script>
+    // Preload
+    var kangaxImage = new Image();
+    kangaxImage.src = 'kangax.png';
+    </script>
 
     <!-- If the query includes 'print-pdf', include the PDF print sheet -->
     <script>
@@ -757,26 +762,6 @@ p.then(onSuccess, onFailure)
         </section>
 
         <section>
-          <h2>Arrow Functions</h2>
-          <small></small>
-          <pre><code class="javascript" data-trim data-noescape>
-this.el.addEventListener('click', function(e) {
-  this.doSomething();
-}.bind(this));
-          </code></pre>
-        </section>
-
-        <section>
-          <h2>Arrow Functions</h2>
-          <small>Firefox</small>
-          <pre><code class="javascript" data-trim data-noescape>
-this.el.addEventListener('click', (e) => {
-  this.doSomething();  // Lexical this.
-});
-          </code></pre>
-        </section>
-
-        <section>
           <h2>for-of</h2>
           <small></small>
           <pre><code class="javascript" data-trim data-noescape>
@@ -962,33 +947,6 @@ class Monster extends Character {
           </code></pre>
         </section>
 
-        <section>
-          <h2>Classes</h2>
-          <small>In progress: Chrome, IE</small>
-          <pre><code class="javascript" data-trim data-noescape>
-class Monster extends Character {
-  // ...
-  attack(character) {
-    super.attack(character);
-  }
-
-  get isAlive() { return this._health &gt; 0; }
-}
-          </code></pre>
-        </section>
-
-        <section>
-          <h2>Modules</h2>
-          <small class="fragment">No native progress. But...</small>
-          <pre><code class="javascript" data-trim data-noescape>
-// Character.js
-export class Character { ... }
-
-// Monster.js
-import {Character} from './Character.js';
-export class Monster extends Character { ...}
-          </code></pre>
-        </section>
 
         <section>
           <h2>Compilers/Transpilers</h2>
@@ -1000,122 +958,6 @@ export class Monster extends Character { ...}
                        <a href="https://github.com/esnext/es6-module-transpiler">es6-module-transpiler</a>
           <li>Facebook's <a href="https://facebook.github.io/regenerator/">Regenerator</a> (only generators)
           </ul>
-        </section>
-
-
-        <section>
-          <h2>Transformers</h2>
-          <pre><code class="javascript" data-trim data-noescape style="font-size: 70%">
-class TypeTransformer extends ParseTreeTransformer {
-  ...
-  transformVariableDeclaration(tree) {
-    if (tree.typeAnnotation) {
-      tree = new VariableDeclaration(tree.location, tree.lvalue, null,
-          tree.initializer);
-    }
-    return super.transformVariableDeclaration(tree);
-  }
-}
-          </code></pre>
-        </section>
-
-        <section>
-          <h2>Visitors</h2>
-          <pre><code class="javascript" data-trim data-noescape style="font-size: 70%">
-class ModuleSpecifierVisitor extends ParseTreeVisitor {
-  ...
-  visitModuleSpecifier(tree) {
-    this.moduleSpecifiers_[tree.token.processedValue] = true;
-  }
-}
-          </code></pre>
-        </section>
-
-        <section>
-          <h2>Angular 2.0</h2>
-          <ul>
-          <li>Type annotations
-          <li>Type asserts
-          <li>Annotations
-          </ul>
-        </section>
-
-        <section>
-          <h2>Type Annotations</h2>
-          <p>Based on TypeScript syntax
-          <pre><code class="javascript" data-trim data-noescape>
-function max(x: number, y: number): number {
-  return x &gt; y ? x : y;
-}
-&nbsp;
-&nbsp;
-&nbsp;
-          </code></pre>
-        </section>
-
-        <section>
-          <h2>Type Annotations</h2>
-          <p>Just remove them
-          <pre><code class="javascript" data-trim data-noescape>
-function max(x, y) {
-  return x &gt; y ? x : y;
-}
-&nbsp;
-&nbsp;
-&nbsp;
-          </code></pre>
-        </section>
-
-        <section>
-          <h2>Type Annotations</h2>
-          <p>Or injects runtime type asserts</p>
-
-          <pre><code class="javascript" data-trim data-noescape>
-function max(x, y) {
-  assert.argumentTypes(x, $tr.type.number,
-                       y, $tr.type.number);
-  return assert.returnType((x > y ? x : y),
-                           $tr.type.number);
-}
-          </code></pre>
-        </section>
-
-        <section>
-          <h2>Annotations</h2>
-          <p>Adds metadata to functions</p>
-
-          <pre><code class="javascript" data-trim data-noescape>
-@Description('Generators FTW')
-function* fib() {
-  var [a, b] = [0, 1];
-  yield a; yield b;
-  while (true) {
-    [a, b] = [b, a + b];
-    yield b;
-  }
-}
-&nbsp;
-&nbsp;
-          </code></pre>
-        </section>
-
-        <section>
-          <h2>Annotations</h2>
-          <p>Adds metadata to functions</p>
-
-          <pre><code class="javascript" data-trim data-noescape>
-&nbsp;
-function* fib() {
-  var [a, b] = [0, 1];
-  yield a; yield b;
-  while (true) {
-    [a, b] = [b, a + b];
-    yield b;
-  }
-}
-fib.annotations =
-    [new Description('Generators FTW')];
-          </code></pre>
         </section>
 
 -->
