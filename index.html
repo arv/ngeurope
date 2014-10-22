@@ -408,7 +408,7 @@ function saveFile(content,
           <pre><code class="javascript" data-trim data-noescape>
 function max(x) {
   var args =
-      Array.prototype.slice.call(1, arguments);
+      Array.prototype.slice.call(arguments, 1);
   return args.reduce(
       (a, b) =&gt; a &gt; b ? a : b, x);
 }
