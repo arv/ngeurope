@@ -119,11 +119,11 @@
           <h2>Three topics on how to improve your code:</h2>
           <ol>
             <li class="fragment">ES6 features
-              <ul class="fragment"><li>Part of all browsers soon</ul>
+              <ul><li>Part of all browsers soon</ul>
             <li class="fragment">Your own language extensions
-              <ul class="fragment"><li>Make it part of your own tool chain</ul>
+              <ul><li>Make it part of your own tool chain</ul>
             <li class="fragment">Angular 2.0 language extensions
-              <ul class="fragment"><li>Part of the Angular tool chain</ul>
+              <ul><li>Part of the Angular tool chain</ul>
           </ol>
         </section>
 
@@ -192,9 +192,8 @@ class Point3D extends Point {
           <h2>Modules</h2>
           <p>Today</p>
           <ul>
-            <li class="fragment">AMD
-            <li class="fragment">Common JS <span class="fragment">+ Browserify
-            <li class="fragment">Others!?!
+            <li>AMD
+            <li>Common JS <span class="fragment">+ Browserify
           </ul>
         </section>
 
@@ -202,8 +201,8 @@ class Point3D extends Point {
           <h2>Modules</h2>
           <p>Today - AMD</p>
           <pre><code class="javascript" data-trim data-noescape>
-define(['./Parser', './SourceFile', ...],
-    function(Parser, SourceFile, ...) {
+define(['./Parser', './SourceFile'],
+    function(Parser, SourceFile) {
       ...
       return exportedValue;
     });
@@ -317,6 +316,8 @@ class MenuButton {
           </ul>
         </section>
 
+<!-- Removed. The Angular communite knows about promises already =P
+
         <section data-state="js">
           <h2>Callback Hell</h2>
           <p>Today</p>
@@ -359,6 +360,85 @@ loadJsonP(userUrl)
               <ul class="fragment">
                 <li>Chain your callbacks instead of nesting them
                 <li>Simplified error handling
+              </ul>
+          </ul>
+        </section>
+-->
+
+        <section data-state="js">
+          <h2>Default parameters</h2>
+          <p>Today</p>
+          <pre><code class="javascript" data-trim data-noescape>
+function saveFile(content, filename) {
+  filename = filename || tempName();
+  fs.writeFileSync(filename, content);
+}
+          </code></pre>
+        </section>
+
+        <section data-state="js">
+          <h2>Default parameters</h2>
+          <p>ES6</p>
+          <pre><code class="javascript" data-trim data-noescape>
+function saveFile(content,
+                  filename = tempName()) {
+  fs.writeFileSync(filename, content);
+}
+          </code></pre>
+        </section>
+
+        <section data-state="js">
+          <h2>Default parameters</h2>
+          <ul>
+            <li>When?
+              <ul class="fragment">
+                <li>When you have optional parameters
+              </ul>
+            <li>What?
+              <ul class="fragment">
+                <li>Makes the intent clear
+                <li>Handles falsey values correct
+              </ul>
+          </ul>
+        </section>
+
+        <section data-state="js">
+          <h2>Rest parameters</h2>
+          <p>Today</p>
+          <pre><code class="javascript" data-trim data-noescape>
+function max(x) {
+  var args =
+      Array.prototype.slice.call(1, arguments);
+  return args.reduce(
+      (a, b) =&gt; a &gt; b ? a : b, x);
+}
+          </code></pre>
+        </section>
+
+        <section data-state="js">
+          <h2>Rest parameters</h2>
+          <p>ES6</p>
+          <pre><code class="javascript" data-trim data-noescape>
+function max(x, ...args) {
+  &nbsp;
+  &nbsp;
+  return args.reduce(
+      (a, b) =&gt; a &gt; b ? a : b, x);
+}
+          </code></pre>
+        </section>
+
+        <section data-state="js">
+          <h2>Rest parameters</h2>
+          <ul>
+            <li>When?
+              <ul class="fragment">
+                <li>When you use <code>arguments</code>
+              </ul>
+            <li>What?
+              <ul class="fragment">
+                <li>Makes the intent clear
+                <li>Is a real Array
               </ul>
           </ul>
         </section>
@@ -638,10 +718,11 @@ repeat.annotations = [
           <h2>Annotations</h2>
           <ul>
             <li class="fragment">Attaches meta data
+              <li class="fragment">Not out of bounds
             <li class="fragment">Can later be used
               <ul>
-                <li class="fragment">Dependency injection
-                <li class="fragment">Component / Directive descriptions
+                <li>Dependency injection
+                <li>Component / Directive descriptions
               </ul>
           </ul>
         </section>
